@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Edit Marks{% endblock %}
+
+{% block content %}
+<h2>Edit Marks for {{ mark.student.name }} - {{ mark.subject }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+    <a href="{% url 'student_list' %}">Cancel</a>
+</form>
+{% endblock content %}

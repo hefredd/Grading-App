@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}All Students{% endblock %}
+
+{% block content %}
+<h1>Student List</h1>
+<a href="{% url 'add_marks' %}">ADD MARKS</a>
+{% for student in students %}
+<h3>{{ student.name }} ({{ student.student_id }})</h3>
+<ul>
+  {% for mark in student.mark_set.all %}
+  <li>
+    {{ mark.subject }}: {{ mark.score }} → Grade: <strong>{{ mark.grade }}</strong>
+
+    <a href="{% url 'edit_marks' mark.id %}">Edit</a>
+
+    <a href="{% url 'delete_marks' mark.id %}" onclick="return confirm('Are you sure you want to delete this mark?')">
+      Delete
+    </a>
+  </li>
+  {% empty %}
+  <li>No marks yet.</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock content %}
